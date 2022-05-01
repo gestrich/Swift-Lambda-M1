@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Swift Application
+
+Globals:
+  Function:
+    Timeout: 10
+    CodeUri: . 
+    Handler: swift.bootstrap
+    Runtime: provided.al2
+    MemorySize: 512
+    
+Resources:
+  HomeServerlessAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod 
+      Cors:
+        AllowMethods: "'GET,POST,OPTIONS'"
+        AllowHeaders: "'content-type'"
+        AllowOrigin: "'*'"
+        AllowCredentials: "'*'"
+  HomeAPI:
+    Type: AWS::Serverless::Function
+    Properties:
+      Events:
+        Test:
+          Type: Api
+          Properties:
+            Path: /test
+            Method: get
+            RestApiId: !Ref HomeServerlessAPI
+Outputs:
+  ApiEndpoint:
+    Description: "API endpoint URL"
+    Value: !Sub "https://${HomeServerlessAPI}.execute-api.${AWS::Region}.amazonaws.com/Prod"
