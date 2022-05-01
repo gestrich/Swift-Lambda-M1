@@ -15,7 +15,7 @@ builder-bot:
 	
 	# Create docker file
 	#docker build -f Dockerfile . -t builder --build-arg SSH_PRIVATE_KEY="$(SSH_KEY)"
-	docker build -f Dockerfile . -t builder 
+	docker build  --platform  linux/amd64 -f Dockerfile . -t builder 
 
 	# prep directories
 	mkdir -p $($@BUILD_DIR)/lambda $($@ARTIFACTS_DIR)
