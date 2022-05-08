@@ -23,6 +23,8 @@ Resources:
   HomeAPI:
     Type: AWS::Serverless::Function
     Properties:
+      Architectures:
+      - arm64
       Events:
         Test:
           Type: Api
