@@ -20,6 +20,7 @@ let package = Package(
             name: "HomeAPI",
             dependencies: [
                 .product(name: "SotoS3", package: "soto"),
+                ]
         ),
         .testTarget(
             name: "HomeAPITests",
